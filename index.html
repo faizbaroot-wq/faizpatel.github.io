@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>مدرسہ سبل السلام</title>
+
+  <!-- اردو فونٹ -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    :root {
+      --green: #0b7a4b;
+      --green-dark: #075337;
+      --gold: #c89c3d;
+      --light: #f7faf9;
+      --text-dark: #10221f;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Noto Nastaliq Urdu", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #f4fffb, #f0f5ff);
+      color: var(--text-dark);
+      line-height: 1.7;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1rem 2rem;
+    }
+
+    /* اوپر والا بار / ہیڈر */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      padding: 0.3rem 0;
+      color: #fff;
+      background: var(--green-dark);
+    }
+
+    .top-bar div {
+      padding: 0 1rem;
+      opacity: 0.9;
+    }
+
+    /* مین ہیڈر / لوگو سیکشن */
+    header {
+      background: #ffffffdd;
+      backdrop-filter: blur(6px);
+      margin-top: 0.5rem;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      border-radius: 0 0 18px 18px;
+      padding: 1.5rem 1rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .brand-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--green-dark);
+      letter-spacing: 0.04em;
+    }
+
+    .brand-sub {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+    }
+
+    nav a {
+      font-size: 0.9rem;
+      padding: 0.2rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(11, 122, 75, 0.2);
+      background: #ffffff;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    nav a:hover {
+      background: var(--green);
+      color: #fff;
+      border-color: transparent;
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+    }
+
+    /* ہیرو سیکشن */
+    .hero {
+      margin-top: 1.5rem;
+      padding: 1.5rem 1.2rem;
+      background: radial-gradient(circle at top right, #e1fff2 0, #ffffff 45%, #eef6ff 100%);
+      border-radius: 18px;
+      border: 1px solid rgba(11, 122, 75, 0.12);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: 1.7rem;
+      color: var(--green-dark);
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-text p {
+      font-size: 1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-badge {
+      font-size: 0.75rem;
+      padding: 0.1rem 0.6rem;
+      background: #ffffff;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .btn-main {
+      font-size: 0.9rem;
+      padding: 0.25rem 0.9rem;
+      border-radius: 999px;
+      background: var(--green);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 5px 12px rgba(11,122,75,0.35);
+    }
+
+    .btn-ghost {
+      font-size: 0.9rem;
+      padding: 0.25rem 0.9rem;
+      border-radius: 999px;
+      background: #ffffff;
+      color: var(--green-dark);
+      border: 1px solid rgba(11,122,75,0.4);
+      cursor: pointer;
+    }
+
+    .hero-right {
+      border-radius: 16px;
+      border: 1px dashed rgba(0,0,0,0.1);
+      padding: 0.9rem;
+      background: #ffffffd8;
+    }
+
+    .hero-right h2 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+      color: var(--green-dark);
+    }
+
+    .hero-right p {
+      font-size: 0.85rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .info-line {
+      font-size: 0.8rem;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      padding-bottom: 0.3rem;
+      margin-bottom: 0.3rem;
+    }
+
+    /* سیکشنز */
+    section {
+      margin-top: 2rem;
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 1.2rem 1rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.03);
+    }
+
+    section h2 {
+      font-size: 1.3rem;
+      margin-bottom: 0.4rem;
+      color: var(--green-dark);
+      border-right: 4px solid var(--gold);
+      padding-right: 0.5rem;
+      display: inline-block;
+    }
+
+    section .sub {
+      font-size: 0.85rem;
+      color: #555;
+      margin-bottom: 0.7rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 0.9rem;
+    }
+
+    .card {
+      padding: 0.8rem 0.7rem;
+      border-radius: 14px;
+      background: #f9fcfb;
+      border: 1px solid rgba(0,0,0,0.04);
+      font-size: 0.9rem;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+      color: var(--green);
+    }
+
+    .card ul {
+      list-style: none;
+      padding-right: 1rem;
+      margin-top: 0.2rem;
+    }
+
+    .card ul li::before {
+      content: "•";
+      margin-left: 0.3rem;
+      color: var(--gold);
+    }
+
+    .highlight {
+      background: #fffbe9;
+      border-right: 3px solid var(--gold);
+      padding: 0.6rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    /* ایڈمیشن ٹیبل */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+    }
+
+    th, td {
+      border: 1px solid rgba(0,0,0,0.08);
+      padding: 0.4rem;
+      text-align: right;
+    }
+
+    th {
+      background: #f2fbf7;
+    }
+
+    /* فوٹر */
+    footer {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #555;
+      padding-bottom: 1rem;
+    }
+
+    footer .line {
+      height: 1px;
+      background: linear-gradient(to left, transparent, rgba(0,0,0,0.2), transparent);
+      margin-bottom: 0.4rem;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem 0.7rem 0.7rem;
+      }
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .top-bar div {
+        padding: 0.1rem 0.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div>رابطہ: 0300-0000000 | 0312-0000000</div>
+  <div>پتہ: مین روڈ، شہر، ضلع، ریاست</div>
+</div>
+
+<div class="page">
+
+  <header>
+    <div class="brand">
+      <div class="brand-title">مدرسہ سبل السلام</div>
+      <div class="brand-sub">قرآن و سنت کی روشنی میں معیاری دینی و عصری تعلیم</div>
+    </div>
+    <nav>
+      <a href="#about">تعارف</a>
+      <a href="#programs">تعلیمی شعبے</a>
+      <a href="#admission">دخول نظام</a>
+      <a href="#rules">قواعد و ضوابط</a>
+      <a href="#contact">رابطہ</a>
+    </nav>
+  </header>
+
+  <!-- ہیرو سیکشن -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>آپ کے بچوں کے لئے محفوظ، باوقار اور معیاری دینی تعلیم</h1>
+      <p>
+        مدرسہ سبل السلام میں ہم قرآنِ کریم، عربی، تجوید، اخلاق، اور عصری مضامین کو متوازن انداز میں شامل کرتے ہیں،
+        تاکہ طالب علم دین اور دنیا دونوں میدانوں میں مضبوط بنیاد حاصل کرسکے۔
+      </p>
+
+      <div class="hero-badges">
+        <span class="hero-badge">حفظ القرآن مع تجوید</span>
+        <span class="hero-badge">ناظرہ + بنیادی عربی</span>
+        <span class="hero-badge">اخلاقی و تربیتی کلاسز</span>
+        <span class="hero-badge">عصری تعلیم کی نگرانی</span>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#admission" class="btn-main">داخلہ کی تفصیل</a>
+        <a href="#contact" class="btn-ghost">مزید معلومات کے لئے رابطہ</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <h2>اہم خصوصیات</h2>
+      <p class="info-line">📌 علیحدہ کلاس رومز، پرسکون اور شریعت کے مطابق ماحول</p>
+      <p class="info-line">📖 ہفتہ وار اسباق، دہرائی، اور کارڈ سسٹم کے ذریعے جائزہ</p>
+      <p class="info-line">👨‍🏫 باصلاحیت اساتذہ، بچوں کی انفرادی نگرانی کے ساتھ</p>
+      <p class="info-line">🕒 اوقات: صبح 7:00 تا 10:00 (حفظ/ناظرہ) | عصر بعد تربیتی کلاس</p>
+      <div class="highlight">
+        نوٹ: اوقات کار اور کلاسوں کی نوعیت موسم اور حالات کے اعتبار سے تبدیل ہوسکتی ہے۔
+      </div>
+    </div>
+  </section>
+
+  <!-- تعارف -->
+  <section id="about">
+    <h2>مدرسہ کا تعارف</h2>
+    <div class="sub">
+      مدرسہ سبل السلام ایک غیر سیاسی، دینی و تعلیمی ادارہ ہے، جس کا مقصد قرآن و سنت کی صحیح
+      تعلیم کے ساتھ بچوں کی اخلاقی و فکری تربیت کرنا ہے۔
+    </div>
+    <div class="grid">
+      <div class="card">
+        <h3>ہدف و مشن</h3>
+        <p>
+          ایسے باعمل، بااخلاق، متوازن مسلمان تیار کرنا جو اپنی ذاتی، خاندانی اور سماجی زندگی میں
+          دین کو ترجیح دیں اور مثبت کردار ادا کریں۔
+        </p>
+      </div>
+      <div class="card">
+        <h3>نظام تعلیم</h3>
+        <p>
+          نصاب میں حفظ، ناظرہ، تجوید، بنیادی فقہ، سیرت، اذکار، اخلاق، اردو و مطالعہ، نیز عصری
+          اسکول کے مضامین پر نگرانی شامل ہے۔
+        </p>
+      </div>
+      <div class="card">
+        <h3>ماحول و نظم</h3>
+        <p>
+          مسجد و مدرسہ کا ماحول صاف، منظم، باحجاب اور ادب و احترام پر مبنی رکھا جاتا ہے۔ حاضری
+          اور اسباق کی پابندی پر خاص توجہ دی جاتی ہے۔
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- تعلیمی شعبے -->
+  <section id="programs">
+    <h2>تعلیمی شعبے</h2>
+    <div class="sub">
+      عمر، استعداد اور اسکولی درجہ کے اعتبار سے طلبہ کو الگ الگ کورس میں تقسیم کیا جاتا ہے۔
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>١۔ ناظرہ قرآن کریم</h3>
+        <ul>
+          <li>قاعدہ سے لے کر مکمل ناظرہ تک</li>
+          <li>حروف کی صحیح مخرج کے ساتھ ادائیگی</li>
+          <li>چھوٹی سورتوں اور مسنون دعاوں کا حفظ</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>٢۔ حفظ القرآن</h3>
+        <ul>
+          <li>پہلے پارے سے مکمل ۳۰ پارے تک حفظ</li>
+          <li>روزانہ نیا سبق، سبقی اور منزل کا نظام</li>
+          <li>ماہانہ اور سالانہ امتحان</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>٣۔ بنیادی دینیات</h3>
+        <ul>
+          <li>نماز، طہارت، عقیدہ کی بنیادی تعلیم</li>
+          <li>آسان فقہی مسائل (بچوں کی سطح کے مطابق)</li>
+          <li>آداب: والدین کے حقوق، اساتذہ کا احترام</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>٤۔ تربیتی و اصلاحی کلاس</h3>
+        <ul>
+          <li>ہفتہ وار بیان، سوال و جواب</li>
+          <li>بچوں کے لئے مختصر تربیتی نشست</li>
+          <li>والدین کے لئے رہنمائی پروگرام (کبھی کبھار)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- دخول / ایڈمیشن -->
+  <section id="admission">
+    <h2>دخول کا نظام</h2>
+    <div class="sub">
+      داخلہ سال میں ایک مرتبہ (یا ضرورت کے مطابق) کھولا جاتا ہے۔ تفصیل درج ذیل ہے:
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>شعبہ</th>
+          <th>کم از کم عمر</th>
+          <th>ضروری اہلیت</th>
+          <th>ضروری دستاویزات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ناظرہ / قاعدہ</td>
+          <td>۵ سال</td>
+          <td>اردو / الف با پڑھنے کی ابتدائی صلاحیت</td>
+          <td>ب فارم کی کاپی، ۲ عدد تصاویر</td>
+        </tr>
+        <tr>
+          <td>حفظ القرآن</td>
+          <td>۷ سال</td>
+          <td>ناظرہ قرآن مکمل، تجوید کی بنیادی جانکاری</td>
+          <td>پچھلے ادارہ کا سرٹیفیکیٹ (اگر ہو)</td>
+        </tr>
+        <tr>
+          <td>بنیادی دینیات</td>
+          <td>۸–۱۴ سال</td>
+          <td>اردو پڑھنے لکھنے کی صلاحیت</td>
+          <td>اسکول کارڈ کی کاپی، والد کا شناختی کارڈ</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight">
+      داخلہ فارم مدرسہ کے دفتر سے حاصل کئے جا سکتے ہیں۔  
+      فارم جمع کرواتے وقت پہلے مختصر انٹرویو اور قاعدہ / ناظرہ کا ٹیسٹ لیا جاتا ہے۔
+    </div>
+  </section>
+
+  <!-- قواعد -->
+  <section id="rules">
+    <h2>قواعد و ضوابط</h2>
+    <div class="sub">
+      طالب علم اور سرپرست دونوں کے لئے چند اہم ہدایات:
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>طالب علم کے لئے</h3>
+        <ul>
+          <li>نماز اور حاضری کی پابندی لازمی ہے۔</li>
+          <li>اساتذہ، ساتھی طلبہ اور مسجد کے ادب کا لحاظ رکھا جائے۔</li>
+          <li>یونیفارم / لباس باحجاب اور شریعت کے مطابق ہو۔</li>
+          <li>بلا عذر غیر حاضری صورت میں سبق پیچھے رہنے کی ذمہ داری خود طالب علم پر ہوگی۔</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>سرپرست کے لئے</h3>
+        <ul>
+          <li>بچوں کی گھر پر دہرائی میں مکمل تعاون کریں۔</li>
+          <li>بچوں کے سامنے اساتذہ یا ادارہ کے خلاف بات نہ کی جائے۔</li>
+          <li>مہینہ وار کارڈ / رپورٹ لازمی دیکھیں اور دستخط کریں۔</li>
+          <li>ضروری بات یا شکایت براہِ راست ناظم / مہتمم تک پہنچائیں۔</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>عمومی نظم</h3>
+        <ul>
+          <li>مدرسہ غیر سیاسی، صرف تعلیمی و تربیتی ادارہ ہے۔</li>
+          <li>فنڈنگ، عطیات اور صدقات کی مکمل معلومات دفتر سے حاصل کی جا سکتی ہے۔</li>
+          <li>کوئی بھی پروگرام / تقریب نظمِ مدرسہ کی اجازت سے ہوگی۔</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- رابطہ -->
+  <section id="contact">
+    <h2>رابطہ و اوقات کار</h2>
+    <div class="sub">
+      مزید معلومات، داخلہ اور تعاون کے لئے درج ذیل ذرائع سے رابطہ کیا جا سکتا ہے:
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>رابطہ نمبر</h3>
+        <p>📞 0300-0000000</p>
+        <p>📞 0312-0000000</p>
+        <p>WhatsApp پر میسج بھی کیا جا سکتا ہے۔</p>
+      </div>
+      <div class="card">
+        <h3>پتہ</h3>
+        <p>
+          مدرسہ سبل السلام،<br>
+          مین روڈ، علاقے کا نام،<br>
+          شہر، ضلع، ریاست / ملک
+        </p>
+      </div>
+      <div class="card">
+        <h3>اوقات دفتر</h3>
+        <p>روزانہ: بعد نماز عصر تا عشاء</p>
+        <p>جمعہ کے دن: نماز کے بعد مخصوص وقت</p>
+        <p>باقی ایام و اوقات ضروری یا ہنگامی صورت میں فون کے ذریعے معلوم کریں۔</p>
+      </div>
+    </div>
+
+    <!-- اگر بعد میں گوگل میپ لگانا چاہیں:
+    <div style="margin-top:0.8rem;">
+      یہاں گوگل میپ کا iframe کوڈ چپکایا جا سکتا ہے۔
+    </div>
+    -->
+  </section>
+
+  <footer>
+    <div class="line"></div>
+    <div>© <span id="year"></span> مدرسہ سبل السلام – جملہ حقوق محفوظ ہیں</div>
+    <div style="margin-top:0.2rem;font-size:0.75rem;opacity:0.8;">
+      ویب سائٹ صرف تعارفی و معلوماتی مقصد کے لئے ہے۔ باقاعدہ اعلان اور شیڈول کے لئے براہِ راست مدرسہ سے رابطہ کریں۔
+    </div>
+  </footer>
+</div>
+
+<script>
+  // موجودہ سال خودکار طور پر فوٹر میں لکھے گا
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
