@@ -784,4 +784,62 @@
 
   function fillTodayReport() {
     document.getElementById("today-title").textContent = todayReport.title;
-    document.getElementById("today-date").textContent = "تاریخ: " + toda
+    document.getElementById("today-date").textContent = "تاریخ: " + todayReport.date;
+    document.getElementById("today-student").textContent = todayReport.student;
+    document.getElementById("today-sabaq").textContent = todayReport.sabaq;
+    document.getElementById("today-sabqi").textContent = todayReport.sabqi;
+    document.getElementById("today-manzil").textContent = todayReport.manzil;
+    document.getElementById("today-mistakes").textContent = todayReport.mistakes;
+    document.getElementById("today-notes").textContent = todayReport.notes;
+  }
+
+  function statusClass(statusText) {
+    if (statusText.includes("بہترین")) return "status-chip status-good";
+    if (statusText.includes("درمیانہ")) return "status-chip status-mid";
+    if (statusText.includes("کمزور")) return "status-chip status-low";
+    return "status-chip status-mid";
+  }
+
+  function fillWeekly() {
+    const tbody = document.getElementById("weekly-body");
+    tbody.innerHTML = "";
+    weeklyReports.forEach(row => {
+      const tr = document.createElement("tr");
+
+      const tdDay = document.createElement("td");
+      tdDay.textContent = row.day;
+      tr.appendChild(tdDay);
+
+      const tdSabaq = document.createElement("td");
+      tdSabaq.textContent = row.sabaq;
+      tr.appendChild(tdSabaq);
+
+      const tdSabqi = document.createElement("td");
+      tdSabqi.textContent = row.sabqi;
+      tr.appendChild(tdSabqi);
+
+      const tdMistakes = document.createElement("td");
+      tdMistakes.textContent = row.mistakes;
+      tr.appendChild(tdMistakes);
+
+      const tdStatus = document.createElement("td");
+      const span = document.createElement("span");
+      span.textContent = row.status;
+      span.className = statusClass(row.status);
+      tdStatus.appendChild(span);
+      tr.appendChild(tdStatus);
+
+      tbody.appendChild(tr);
+    });
+  }
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  document.addEventListener("DOMContentLoaded", function () {
+    fillTodayReport();
+    fillWeekly();
+  });
+</script>
+
+</body>
+</html>
