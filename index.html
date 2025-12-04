@@ -2,844 +2,415 @@
 <html lang="ur" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>مدرسہ سبل السلام – ڈیجیٹل رپورٹ سسٹم</title>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>مدرسہ سبل السلام – شعبۂ حفظ یومیہ رپورٹ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- اردو فونٹ -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --bg: #f4f7fb;
-      --primary: #0b7a4b;
-      --primary-dark: #075237;
-      --accent: #f6b540;
-      --card-bg: #ffffff;
-      --muted: #65727d;
-      --border-soft: rgba(0,0,0,0.06);
+    :root{
+      --paper-bg:#ffffff;
+      --border:#000;
+      --primary:#0b7a4b;
+      --muted:#6b7280;
+      --accent:#f6b540;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    *{box-sizing:border-box;}
+
+    body{
+      margin:0;
+      font-family:"Noto Nastaliq Urdu","Noto Nastaliq Urdu",serif;
+      background:linear-gradient(180deg,#eef4f8 0,#f9fafb 100%);
+      color:#111827;
     }
 
-    body {
-      font-family: "Noto Nastaliq Urdu", system-ui, sans-serif;
-      background: radial-gradient(circle at top, #f8fff9 0, #f3f6ff 45%, #eef2f7 100%);
-      color: #122027;
-      line-height: 1.8;
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:1rem;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    .topbar{
+      background:#063a2e;
+      color:#fff;
+      padding:.5rem .9rem;
+      font-size:.9rem;
+      display:flex;
+      justify-content:space-between;
+      gap:.5rem;
+      flex-wrap:wrap;
     }
 
-    .page {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 1rem 2.5rem;
-    }
-
-    /* Top bar */
-    .top-bar {
-      background: #071b14;
-      color: #f2f7f4;
-      font-size: 0.85rem;
-      padding: 0.25rem 0.6rem;
-      display: flex;
-      justify-content: space-between;
-      gap: 0.5rem;
-      flex-wrap: wrap;
+    .card{
+      background:#fff;
+      border-radius:12px;
+      padding:1rem;
+      box-shadow:0 10px 30px rgba(15,23,42,0.08);
+      margin-top:1rem;
+      border:1px solid rgba(0,0,0,0.04);
     }
-
-    .top-bar span {
-      opacity: 0.9;
-    }
-
-    /* Header + nav */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      backdrop-filter: blur(8px);
-      background: #ffffffde;
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
-      margin-bottom: 1.1rem;
-    }
-
-    .header-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0.8rem 1rem 0.7rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
-    .brand-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-    }
-
-    .brand-name {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--primary-dark);
-    }
-
-    .brand-tagline {
-      font-size: 0.95rem;
-      color: var(--muted);
-    }
-
-    .badge-small {
-      font-size: 0.75rem;
-      padding: 0.15rem 0.6rem;
-      border-radius: 999px;
-      background: #ecfdf3;
-      border: 1px solid rgba(4, 120, 87, 0.3);
-      color: #065f46;
-      white-space: nowrap;
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      font-size: 0.9rem;
-    }
-
-    nav a {
-      padding: 0.15rem 0.8rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: #ffffff;
-      transition: all 0.18s ease;
-    }
-
-    nav a:hover {
-      background: var(--primary);
-      color: #ffffff;
-      border-color: transparent;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 10px rgba(15, 118, 110, 0.25);
-    }
-
-    /* Hero */
-    .hero {
-      margin-top: 1.4rem;
-      display: grid;
-      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.2fr);
-      gap: 1.4rem;
-      padding: 1.4rem 1.1rem;
-      border-radius: 20px;
-      background: radial-gradient(circle at top right, #e0ffe8 0, #ffffff 45%, #eef4ff 100%);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
-    }
-
-    .hero-left h1 {
-      font-size: 1.9rem;
-      color: var(--primary-dark);
-      margin-bottom: 0.4rem;
-    }
-
-    .hero-left p {
-      font-size: 0.98rem;
-      color: #374151;
-      margin-bottom: 0.7rem;
-    }
-
-    .hero-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .chip {
-      font-size: 0.78rem;
-      padding: 0.12rem 0.7rem;
-      border-radius: 999px;
-      background: #ffffff;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      align-items: center;
-    }
-
-    .btn-main {
-      font-size: 0.9rem;
-      padding: 0.3rem 1.1rem;
-      border-radius: 999px;
-      border: none;
-      background: linear-gradient(135deg, #0f766e, #15803d);
-      color: #ffffff;
-      cursor: pointer;
-      box-shadow: 0 10px 20px rgba(5, 150, 105, 0.4);
-    }
-
-    .btn-ghost {
-      font-size: 0.9rem;
-      padding: 0.3rem 0.9rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      background: #ffffff;
-      cursor: pointer;
-    }
-
-    .note-soft {
-      font-size: 0.78rem;
-      color: #6b7280;
-    }
-
-    .hero-right {
-      border-radius: 18px;
-      background: #ffffffeb;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      padding: 0.9rem;
-    }
-
-    .hero-right-title {
-      font-size: 1rem;
-      color: var(--primary-dark);
-      margin-bottom: 0.2rem;
-    }
-
-    .hero-right-sub {
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-bottom: 0.6rem;
-    }
-
-    .hero-meta {
-      font-size: 0.85rem;
-      border-radius: 10px;
-      border: 1px dashed rgba(148, 163, 184, 0.8);
-      padding: 0.5rem 0.7rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .hero-meta div {
-      margin-bottom: 0.25rem;
-    }
-
-    .hero-meta div:last-child {
-      margin-bottom: 0;
-    }
-
-    .tag-inline {
-      font-size: 0.75rem;
-      background: #ecfdf5;
-      border-radius: 999px;
-      padding: 0.1rem 0.5rem;
-      display: inline-block;
-    }
-
-    /* Generic sections */
-    section {
-      margin-top: 1.8rem;
-    }
-
-    .section-card {
-      background: #ffffff;
-      border-radius: 18px;
-      padding: 1.1rem 1rem;
-      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 0.6rem;
-      margin-bottom: 0.7rem;
-      flex-wrap: wrap;
-    }
-
-    .section-header h2 {
-      font-size: 1.3rem;
-      color: var(--primary-dark);
-      border-right: 4px solid var(--accent);
-      padding-right: 0.6rem;
-    }
-
-    .section-header span {
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 0.9rem;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: 14px;
-      border: 1px solid var(--border-soft);
-      padding: 0.8rem 0.75rem;
-      font-size: 0.9rem;
-    }
-
-    .card h3 {
-      font-size: 1rem;
-      margin-bottom: 0.25rem;
-      color: var(--primary);
-    }
-
-    .card p {
-      font-size: 0.87rem;
-      color: #374151;
-    }
-
-    .pill {
-      display: inline-block;
-      font-size: 0.75rem;
-      padding: 0.05rem 0.55rem;
-      border-radius: 999px;
-      background: #eff6ff;
-      margin-bottom: 0.25rem;
-      border: 1px solid rgba(59, 130, 246, 0.3);
-    }
-
-    /* Live report area */
-    .report-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr);
-      gap: 1rem;
-    }
 
-    .report-main {
-      border-radius: 14px;
-      padding: 0.9rem 0.8rem;
-      background: linear-gradient(145deg, #ecfdf3, #f5f3ff);
-      border: 1px solid rgba(34, 197, 94, 0.45);
+    .card h2,.card h3{
+      margin-top:0;
+      color:var(--primary);
     }
 
-    .report-main h3 {
-      font-size: 1.05rem;
-      color: var(--primary-dark);
-      margin-bottom: 0.35rem;
+    /* ---------- A4 رپورٹ پیج ---------- */
+    .a4-wrapper{
+      margin-top:1rem;
+      display:flex;
+      justify-content:center;
     }
 
-    .report-date {
-      font-size: 0.84rem;
-      color: #4b5563;
-      margin-bottom: 0.4rem;
+    .a4-page{
+      width:8.27in;          /* A4 چوڑائی */
+      background:var(--paper-bg);
+      border:1px solid var(--border);
+      min-height:11.69in;    /* کم سے کم A4 لمبائی، مزید ہو تو خود بخود بڑھے گی */
+      position:relative;
+      overflow:hidden;
     }
 
-    .report-main ul {
-      list-style: none;
-      font-size: 0.9rem;
+    /* بائیں عمودی ہیڈر (اردو لحاظ سے دائیں طرف لگنا بہتر لگتا ہے، لیکن
+       ہم اسے بائیں ہی رکھتے ہیں تاکہ پرنٹ A4 جیسا رہے) */
+    .side-header{
+      position:absolute;
+      top:0;
+      bottom:0;
+      left:0;
+      width:0.8in;
+      border-right:1px solid var(--border);
+      background:linear-gradient(195deg,#1c325a,#2b5876);
+      color:#fff;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      align-items:center;
+      padding:.5rem .1rem;
     }
 
-    .report-main ul li {
-      margin-bottom: 0.18rem;
+    .side-header-block{
+      writing-mode:vertical-rl;
+      transform:rotate(180deg);
+      text-align:center;
+      font-size:11pt;
+      line-height:1.6;
+      white-space:nowrap;
     }
 
-    .report-main ul li span {
-      font-weight: 700;
-      color: #111827;
-      margin-left: 0.3rem;
+    .side-header .school-name{
+      font-weight:bold;
+      font-size:13pt;
     }
 
-    .report-note {
-      font-size: 0.84rem;
-      margin-top: 0.5rem;
-      padding: 0.45rem 0.5rem;
-      border-radius: 10px;
-      background: #fefce8;
-      border-right: 3px solid var(--accent);
+    .side-header .school-address{
+      font-weight:normal;
+      font-size:10pt;
     }
 
-    .report-side {
-      display: flex;
-      flex-direction: column;
-      gap: 0.55rem;
+    .side-header .teacher{
+      font-size:11pt;
     }
 
-    .report-side-card {
-      border-radius: 14px;
-      padding: 0.7rem 0.75rem;
-      background: #f9fafb;
-      border: 1px solid var(--border-soft);
-      font-size: 0.87rem;
+    /* مین رپورٹ ایریا */
+    .sheet{
+      margin-left:0.8in;  /* سائیڈ ہیڈر کے بعد */
+      padding:0.35in 0.4in;
     }
 
-    .report-side-card h4 {
-      font-size: 0.98rem;
-      margin-bottom: 0.25rem;
-      color: #111827;
+    .sheet-header{
+      text-align:center;
+      margin-bottom:.3in;
     }
 
-    .badge-soft {
-      font-size: 0.75rem;
-      padding: 0.05rem 0.5rem;
-      border-radius: 999px;
-      background: #eef2ff;
-      border: 1px solid rgba(129, 140, 248, 0.4);
-      display: inline-block;
-      margin-bottom: 0.2rem;
+    .sheet-header h1{
+      margin:0;
+      font-size:20pt;
+      color:var(--primary);
     }
 
-    /* Weekly table */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.85rem;
-      margin-top: 0.4rem;
+    .sheet-header .subtitle{
+      font-size:11pt;
+      color:#374151;
     }
 
-    th, td {
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      padding: 0.35rem 0.4rem;
-      text-align: right;
+    .sheet-header .subline{
+      font-size:10pt;
+      color:#4b5563;
+      margin-top:.2rem;
     }
 
-    th {
-      background: #eff6ff;
-      font-weight: 600;
-      color: #1f2937;
+    /* ---------- جدول (۱۰ باکس – سب ہیڈنگز ورٹیکل) ---------- */
+    table.report{
+      width:100%;
+      border-collapse:collapse;
+      table-layout:fixed;   /* تاکہ سارے کالم سیدھے اور فکسڈ رہیں */
+      border:1px solid var(--border);
     }
 
-    tr:nth-child(even) td {
-      background: #f9fafb;
+    table.report th,
+    table.report td{
+      border:1px solid var(--border);
+      padding:0;
+      text-align:center;
+      vertical-align:middle;
+      position:relative;
     }
 
-    .status-chip {
-      display: inline-block;
-      font-size: 0.76rem;
-      padding: 0.05rem 0.5rem;
-      border-radius: 999px;
+    /* تمام ہیڈنگز ایک ہی لائن مگر ورٹیکل انداز میں */
+    .vertical-header{
+      writing-mode:vertical-rl;
+      transform:rotate(180deg);   /* اوپر سے نیچے کی بجائے نیچے سے اوپر اردو پڑھنے کیلئے */
+      white-space:nowrap;
+      padding:.35rem .15rem;
+      font-size:9pt;              /* سائز کم رکھا تاکہ پورا text باکس میں رہے */
     }
 
-    .status-good {
-      background: #dcfce7;
-      border: 1px solid #22c55e;
-      color: #166534;
+    /* نمبر/نام/اوقات/تفصیلات والے پہلے چار باکس */
+    .col-small{
+      width:0.7in;
     }
 
-    .status-mid {
-      background: #fef9c3;
-      border: 1px solid #eab308;
-      color: #854d0e;
+    /* دن اور تاریخ والے ۶ باکس */
+    .col-day{
+      width:0.9in;
     }
 
-    .status-low {
-      background: #fee2e2;
-      border: 1px solid #ef4444;
-      color: #991b1b;
+    /* باڈی میں نارمل افقی ٹیکسٹ */
+    table.report tbody td{
+      padding:.25rem .2rem;
+      font-size:10pt;
     }
 
-    /* Contact & footer */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
-      gap: 0.8rem;
+    table.report tbody td:nth-child(1){ /* نمبر */
+      width:0.7in;
     }
 
-    .contact-item {
-      font-size: 0.9rem;
-      padding: 0.7rem 0.75rem;
-      border-radius: 14px;
-      background: #f9fafb;
-      border: 1px solid rgba(148, 163, 184, 0.5);
+    /* طلبہ کے نام کیلئے تھوڑا زیادہ */
+    table.report tbody td:nth-child(2){
+      text-align:right;
+      padding-right:.3rem;
     }
 
-    .contact-item h3 {
-      font-size: 0.98rem;
-      margin-bottom: 0.25rem;
-      color: var(--primary-dark);
+    /* حاشیہ نوٹس */
+    .note-box{
+      margin-top:.4in;
+      border:1px dashed var(--border);
+      padding:.3in .25in;
+      font-size:10pt;
+      min-height:1.2in;
     }
 
-    footer {
-      margin-top: 2rem;
-      font-size: 0.8rem;
-      text-align: center;
-      color: #6b7280;
+    .note-title{
+      font-weight:bold;
+      margin-bottom:.2rem;
+      color:#111827;
     }
 
-    footer .line {
-      height: 1px;
-      background: linear-gradient(to left, transparent, rgba(148, 163, 184, 0.9), transparent);
-      margin-bottom: 0.4rem;
+    /* نیچے چھوٹا فوٹر، رابطہ وغیرہ */
+    .sheet-footer{
+      margin-top:.2in;
+      display:flex;
+      justify-content:space-between;
+      font-size:9.5pt;
+      color:#4b5563;
+      gap:.5rem;
+      flex-wrap:wrap;
     }
 
-    @media (max-width: 800px) {
-      .hero {
-        grid-template-columns: 1fr;
+    /* پرنٹ */
+    @media print{
+      body{
+        background:#fff;
       }
-      .report-layout {
-        grid-template-columns: 1fr;
+      .topbar,
+      .card-outside-only,
+      .no-print{
+        display:none !important;
       }
-      .contact-grid {
-        grid-template-columns: 1fr;
+      .wrap{
+        max-width:none;
+        padding:0;
       }
-      .header-inner {
-        padding-inline: 0.8rem;
-      }
-      .hero {
-        padding-inline: 0.8rem;
+      .a4-page{
+        margin:0;
+        border:none;
+        box-shadow:none;
+        width:8.27in;
+        min-height:11.69in;
       }
     }
+
   </style>
 </head>
 <body>
 
-<div class="top-bar">
-  <span>رابطہ: 0300-0000000 / 0312-0000000</span>
-  <span>مقام: مدرسہ سبل السلام، مین روڈ، شہر / ضلع</span>
-</div>
-
-<header>
-  <div class="header-inner">
-    <div class="brand-row">
-      <div>
-        <div class="brand-name">مدرسہ سبل السلام</div>
-        <div class="brand-tagline">قرآن و سنت کی روشنی میں معیاری دینی و عصری تعلیم</div>
-      </div>
-      <div class="badge-small">ڈیجیٹل حاضری اور روزانہ رپورٹ سسٹم</div>
-    </div>
-    <nav>
-      <a href="#home">ہوم</a>
-      <a href="#live-report">آج کی رپورٹ</a>
-      <a href="#weekly">ہفتہ وار جائزہ</a>
-      <a href="#curriculum">نصاب و شعبہ جات</a>
-      <a href="#contact">رابطہ</a>
-    </nav>
+  <!-- اوپر ٹاپ بار -->
+  <div class="topbar no-print">
+    <div>مدرسہ سبل السلام – شعبۂ حفظ یومیہ رپورٹ</div>
+    <div>رابطہ: 9599579551 / 9811228371</div>
   </div>
-</header>
 
-<div class="page">
-
-  <!-- Hero -->
-  <section id="home" class="hero">
-    <div class="hero-left">
-      <h1>آپ کے بچوں کی دینی تعلیم، اب منظم ڈیجیٹل رپورٹ کے ساتھ</h1>
-      <p>
-        مدرسہ سبل السلام میں حفظ، ناظرہ، تجوید اور بنیادی دینیات کے ساتھ ساتھ
-        ہر طالب علم کی <strong>روزانہ کارکردگی</strong> کو ریکارڈ کر کے
-        والدین تک منظم انداز میں پہنچایا جاتا ہے۔
+  <main class="wrap">
+    <!-- تعارف، نمبرز، ذمہ داران -->
+    <section class="card card-outside-only">
+      <h2>مدرسہ سبل السلام – شعبۂ حفظ</h2>
+      <p class="muted">
+        یہ پیج طلبہ کی یومیہ حاضری اور کارکردگی کا A4 فارمیٹ میں ریکارڈ رکھنے کیلئے تیار کیا گیا ہے،
+        جسے براہِ راست پرنٹ بھی کیا جا سکتا ہے۔
       </p>
-      <div class="hero-chips">
-        <span class="chip">روزانہ: سبق + سبقی + منزل رپورٹ</span>
-        <span class="chip">ہفتہ وار خلاصہ، آسان جدول میں</span>
-        <span class="chip">بچوں کی تربیت، نظم و ضبط پر خصوصی فوکس</span>
-      </div>
-      <div class="hero-actions">
-        <button class="btn-main" onclick="document.getElementById('live-report').scrollIntoView({behavior:'smooth'})">
-          آج کی رپورٹ دیکھیں
-        </button>
-        <button class="btn-ghost" onclick="document.getElementById('weekly').scrollIntoView({behavior:'smooth'})">
-          ہفتہ وار کارکردگی
-        </button>
-        <span class="note-soft">رپورٹ کا ڈیٹا ناظم / معلم روزانہ اپڈیٹ کریں</span>
-      </div>
-    </div>
 
-    <div class="hero-right">
-      <div class="hero-right-title">رپورٹ سسٹم کا خلاصہ</div>
-      <div class="hero-right-sub">سادہ ترمیم، آٹومیٹک لےآؤٹ – صرف متن بدلیے، ڈیزائن خود منظم رہے گا۔</div>
-      <div class="hero-meta">
-        <div>📌 <strong>تین بنیادی خانے:</strong> سبق، سبقی، منزل</div>
-        <div>🧒 <strong>فوکس:</strong> ہر طالب علم کی انفرادی کارکردگی</div>
-        <div>📅 <strong>رپورٹ:</strong> روزانہ + ہفتہ وار خلاصہ</div>
-      </div>
-      <div class="tag-inline">Manual entry – Live display</div>
-    </div>
-  </section>
-
-  <!-- Highlights -->
-  <section>
-    <div class="section-card">
-      <div class="section-header">
-        <h2>مدرسہ کی نمایاں خصوصیات</h2>
-        <span>تعلیم، تربیت اور شفاف رپورٹنگ کا امتزاج</span>
-      </div>
-      <div class="grid">
-        <div class="card">
-          <span class="pill">حفظ و ناظرہ</span>
-          <h3>منظم حفظ القرآن پروگرام</h3>
-          <p>روزانہ سبق، سبقی اور منزل کے واضح نظام کے ساتھ، ماہانہ اور سالانہ امتحان کے ذریعے مستقل جائزہ۔</p>
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;margin-top:.7rem">
+        <div style="flex:1 1 220px">
+          <h3 style="margin:.2rem 0;color:var(--primary)">رابطہ نمبر</h3>
+          <div>حافظ ابو الفیض – 9599579551</div>
+          <div>حافظ عمار – 9811228371</div>
         </div>
-        <div class="card">
-          <span class="pill">ڈیجیٹل رپورٹ</span>
-          <h3>والدین کیلئے واضح کارکردگی</h3>
-          <p>ہر بچے کی روزانہ پیش رفت، کمزوری اور مضبوطی کو سادہ الفاظ اور جدول کی شکل میں پیش کیا جاتا ہے۔</p>
+        <div style="flex:1 1 220px">
+          <h3 style="margin:.2rem 0;color:var(--primary)">ذمہ داران</h3>
+          <div>حافظ یاسر</div>
+          <div>حافظ شکیل میرٹھی</div>
+          <div>بھائی محسن</div>
         </div>
-        <div class="card">
-          <span class="pill">تربیتی ماحول</span>
-          <h3>اخلاق و آداب پر خصوصی توجہ</h3>
-          <p>نماز، اذکار، آدابِ مجلس، استاد و والدین کے احترام اور عملی تربیت پر مستقل محنت۔</p>
+        <div style="flex:1 1 220px">
+          <h3 style="margin:.2rem 0;color:var(--primary)">طلبہ</h3>
+          <div>عافی ندیم</div>
+          <div>زید</div>
+          <div>ابراہیم</div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Live Report -->
-  <section id="live-report">
-    <div class="section-card">
-      <div class="section-header">
-        <h2>آج کی لائیو رپورٹ</h2>
-        <span>یہ حصہ آپ روزانہ صرف ایک جگہ کے ڈیٹا سے کنٹرول کر سکتے ہیں</span>
-      </div>
-
-      <div class="report-layout">
-        <div class="report-main">
-          <h3 id="today-title">آج کی رپورٹ</h3>
-          <div class="report-date" id="today-date">تاریخ: ...</div>
-          <ul>
-            <li><span>طالب علم:</span><span id="today-student">...</span></li>
-            <li><span>سبق:</span><span id="today-sabaq">...</span></li>
-            <li><span>سبقی:</span><span id="today-sabqi">...</span></li>
-            <li><span>منزل:</span><span id="today-manzil">...</span></li>
-            <li><span>غلطیاں:</span><span id="today-mistakes">...</span></li>
-          </ul>
-          <div class="report-note" id="today-notes">
-            نوٹ: ...
+    <!-- A4 رپورٹ پیج -->
+    <section class="a4-wrapper">
+      <div class="a4-page">
+        <!-- بائیں ورٹیکل ہیڈر -->
+        <div class="side-header">
+          <div class="side-header-block">
+            شعبۂ حفظ یومیہ رپورٹ
+          </div>
+          <div class="side-header-block">
+            <span class="school-name">مدرسہ سبل السلام</span>
+            <span class="school-address">مسجدِ محتسب، پھاٹک حبش خان، دہلی-٦</span>
+          </div>
+          <div class="side-header-block teacher">
+            مدرس: حافظ ابوالفیض پٹیل
           </div>
         </div>
 
-        <div class="report-side">
-          <div class="report-side-card">
-            <h4>اس صفحہ کو کیسے اپڈیٹ کریں؟</h4>
-            <span class="badge-soft">بغیر کوڈ سمجھے صرف متن بدلیں</span>
-            <p>
-              GitHub میں <strong>index.html</strong> کھول کر بالکل نیچے جائیں۔
-              وہاں <strong>JavaScript</strong میں "صرف یہی حصہ روز / ہفتہ وار بدلیں" لکھا ہوگا۔
-              اسی کے اندر تاریخ، نام، سبق وغیرہ کا متن بدلیے، پوری رپورٹ خودکار طور پر اپڈیٹ ہو جائے گی۔
+        <!-- اندرونی شیٹ -->
+        <div class="sheet">
+          <div class="sheet-header">
+            <h1>یومیہ حاضری و کارکردگی شیٹ</h1>
+            <div class="subtitle">شعبۂ حفظ القرآن الکریم</div>
+            <div class="subline">ہفتہ وار ریکارڈ: پیر 1/12/25 تا ہفتہ 6/12/25</div>
+          </div>
+
+          <!-- جدول: ۱۰ ورٹیکل ہیڈر والے باکس -->
+          <table class="report">
+            <thead>
+              <tr>
+                <!-- 1: نمبر -->
+                <th class="col-small">
+                  <span class="vertical-header">نمبر</span>
+                </th>
+
+                <!-- 2: نام -->
+                <th class="col-small">
+                  <span class="vertical-header">نام</span>
+                </th>
+
+                <!-- 3: اوقات -->
+                <th class="col-small">
+                  <span class="vertical-header">اوقات</span>
+                </th>
+
+                <!-- 4: تفصیلات -->
+                <th class="col-small">
+                  <span class="vertical-header">تفصیلات</span>
+                </th>
+
+                <!-- 5: پیر 1/12/25 -->
+                <th class="col-day">
+                  <span class="vertical-header">پیر 1/12/25</span>
+                </th>
+
+                <!-- 6: منگل 2/12/25 -->
+                <th class="col-day">
+                  <span class="vertical-header">منگل 2/12/25</span>
+                </th>
+
+                <!-- 7: بدھ 3/12/25 -->
+                <th class="col-day">
+                  <span class="vertical-header">بدھ 3/12/25</span>
+                </th>
+
+                <!-- 8: جمعرات 4/12/25 -->
+                <th class="col-day">
+                  <span class="vertical-header">جمعرات 4/12/25</span>
+                </th>
+
+                <!-- 9: جمعہ 5/12/25 -->
+                <th class="col-day">
+                  <span class="vertical-header">جمعہ 5/12/25</span>
+                </th>
+
+                <!-- 10: ہفتہ 6/12/25 -->
+                <th class="col-day">
+                  <span class="vertical-header">ہفتہ 6/12/25</span>
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <!-- اسٹوڈنٹس کی تین مثالیں؛ آپ چاہیں تو مزید قطاریں کاپی کر کے بڑھا سکتے ہیں -->
+              <tr>
+                <td>1</td>
+                <td>عافی ندیم</td>
+                <td>صبح</td>
+                <td>سبق / سبقی / منزل</td>
+                <td></td><td></td><td></td><td></td><td></td><td></td>
+              </tr>
+
+              <tr>
+                <td>2</td>
+                <td>زید</td>
+                <td>صبح</td>
+                <td>سبق / سبقی / منزل</td>
+                <td></td><td></td><td></td><td></td><td></td><td></td>
+              </tr>
+
+              <tr>
+                <td>3</td>
+                <td>ابراہیم</td>
+                <td>صبح</td>
+                <td>سبق / سبقی / منزل</td>
+                <td></td><td></td><td></td><td></td><td></td><td></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- نوٹس / خصوصی ہدایات -->
+          <div class="note-box">
+            <div class="note-title">نوٹ / خصوصی مشاہدات:</div>
+            <p style="margin:0;">
+              &nbsp;
             </p>
           </div>
-          <div class="report-side-card">
-            <h4>استعمال کا مشورہ</h4>
-            <p>
-              ہر دن کے اختتام پر معلم / ناظم محض:
-            </p>
-            <ul style="list-style:none;font-size:0.85rem;margin-top:0.2rem;">
-              <li>▪ تاریخ اپڈیٹ کریں</li>
-              <li>▪ طالب علم / کلاس کا نام بدلیں</li>
-              <li>▪ سبق، سبقی، منزل لکھیں</li>
-              <li>▪ غلطیاں اور اہم نوٹس درج کریں</li>
-            </ul>
+
+          <!-- فوٹر -->
+          <div class="sheet-footer">
+            <div>دستخط مدرس: ____________________</div>
+            <div>دستخط ناظمِ شعبہ: ____________________</div>
+            <div>تاریخ: ______ / ______ / 20______</div>
           </div>
+
         </div>
       </div>
-
-    </div>
-  </section>
-
-  <!-- Weekly Overview -->
-  <section id="weekly">
-    <div class="section-card">
-      <div class="section-header">
-        <h2>ہفتہ وار خلاصہ</h2>
-        <span>یہ جدول بھی اسی نیچے والے ڈیٹا بلاک سے خودکار اپڈیٹ ہوگا</span>
-      </div>
-
-      <table>
-        <thead>
-          <tr>
-            <th>دن</th>
-            <th>سبق / پارہ</th>
-            <th>سبقی / منزل</th>
-            <th>غلطیاں</th>
-            <th>مجموعی کارکردگی</th>
-          </tr>
-        </thead>
-        <tbody id="weekly-body">
-          <!-- JS سے بھرے گا -->
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- Curriculum / Programs -->
-  <section id="curriculum">
-    <div class="section-card">
-      <div class="section-header">
-        <h2>نصاب و تعلیمی شعبے</h2>
-        <span>عمر اور استعداد کے لحاظ سے منظم تقسیم</span>
-      </div>
-      <div class="grid">
-        <div class="card">
-          <h3>ناظرہ / قاعدہ پروگرام</h3>
-          <p>قاعدہ سے مکمل ناظرہ تک، مخارج و صفات کے ساتھ، سورتوں اور مسنون دعاؤں کا منتخب حفظ پروگرام۔</p>
-        </div>
-        <div class="card">
-          <h3>حفظ القرآن</h3>
-          <p>سبق، سبقی اور منزل کے متوازن نظام کے ساتھ، ہر طالب علم کے لئے انفرادی رفتار اور ٹارگٹ مقرر کیا جاتا ہے۔</p>
-        </div>
-        <div class="card">
-          <h3>بنیادی دینیات و تربیت</h3>
-          <p>نماز، طہارت، عقیدہ، سیرت، اذکار، آداب اور عملی تربیت کے لئے مختصر مگر مؤثر نصاب۔</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact">
-    <div class="section-card">
-      <div class="section-header">
-        <h2>رابطہ و معلومات</h2>
-        <span>داخلہ، تعاون، یا تفصیلی گفتگو کیلئے</span>
-      </div>
-
-      <div class="contact-grid">
-        <div class="contact-item">
-          <h3>رابطہ نمبر</h3>
-          <p>📞 0300-0000000<br>📞 0312-0000000</p>
-          <p>WhatsApp پر مختصر پیغام کے ذریعے بھی رابطہ کیا جا سکتا ہے۔</p>
-        </div>
-        <div class="contact-item">
-          <h3>پتہ</h3>
-          <p>مدرسہ سبل السلام<br>مین روڈ، علاقے کا نام<br>شہر، ضلع، ریاست / ملک</p>
-          <p>تفصیلی لوکیشن Google Maps لنک کے ذریعے بھی دی جا سکتی ہے (بعد میں شامل کیا جا سکتا ہے)۔</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="line"></div>
-    <div>© <span id="year"></span> مدرسہ سبل السلام – تعلیمی و تربیتی ویب پورٹل</div>
-    <div style="margin-top:0.2rem;">
-      رپورٹ میں درج تمام معلومات داخلی تعلیمی مقاصد کے لئے ہیں، باضابطہ کاروائی کیلئے براہِ راست مدرسہ سے رابطہ ضروری ہے۔
-    </div>
-  </footer>
-</div>
-
-<!-- ================== LIVE REPORT کا JS بلاک ================== -->
-<script>
-  // ==== صرف یہی حصہ روز / ہفتہ وار بدلیں (آسان اردو متن) ====
-
-  // آج کی رپورٹ
-  const todayReport = {
-    date: "۳ دسمبر ۲۰۲۵",
-    title: "آج کی رپورٹ – صبح کی شفٹ",
-    student: "حافظ احمد (کلاس حفظ – سینئر گروپ)",
-    sabaq: "سورۃ کہف، رکوع ۱ تا ۵",
-    sabqi: "سورۃ یٰس، رکوع ۳ تا ۶",
-    manzil: "جز ۳۰ (سورۃ النبأ تا الناس)",
-    mistakes: "۲ خفیف تجویدی غلطیاں (مد اور ادغام کے مسائل)",
-    notes: "عمومی کارکردگی بہت عمدہ رہی، رفتار مناسب ہے۔ اگلے دو دن میں اسی سبق کو مضبوط کرنے پر توجہ دیں۔"
-  };
-
-  // اس ہفتہ کی خلاصہ رپورٹ (ہر دن کیلئے ایک لائن)
-  // جتنے دن چاہیں اتنے آبجیکٹس شامل کریں
-  const weeklyReports = [
-    {
-      day: "پیر",
-      sabaq: "سورۃ کہف، رکوع ۱–۳",
-      sabqi: "سورۃ یٰس، رکوع ۱–۴",
-      mistakes: "۳",
-      status: "بہتر"
-    },
-    {
-      day: "منگل",
-      sabaq: "سورۃ کہف، رکوع ۴–۵",
-      sabqi: "سورۃ یٰس، رکوع ۳–۶",
-      mistakes: "۲",
-      status: "بہترین"
-    },
-    {
-      day: "بدھ",
-      sabaq: "سورۃ کہف، دہرائی مکمل",
-      sabqi: "جز ۲۹ کا جزوی اعادہ",
-      mistakes: "۴",
-      status: "درمیانہ"
-    },
-    {
-      day: "جمعرات",
-      sabaq: "جز ۳۰، سورۃ عم تا ناس",
-      sabqi: "سورۃ ملک، رکوع ۱–۳",
-      mistakes: "۱",
-      status: "بہترین"
-    },
-    {
-      day: "جمعہ",
-      sabaq: "منتخب سورتوں کا اعادہ",
-      sabqi: "پچھلے ہفتوں کی منزل",
-      mistakes: "۲",
-      status: "بہتر"
-    }
-  ];
-
-  // ==== اوپر والا ڈیٹا بدلیں، نیچے والے فنکشن کو نہ چھیڑیں ====
-
-
-  function fillTodayReport() {
-    document.getElementById("today-title").textContent = todayReport.title;
-    document.getElementById("today-date").textContent = "تاریخ: " + todayReport.date;
-    document.getElementById("today-student").textContent = todayReport.student;
-    document.getElementById("today-sabaq").textContent = todayReport.sabaq;
-    document.getElementById("today-sabqi").textContent = todayReport.sabqi;
-    document.getElementById("today-manzil").textContent = todayReport.manzil;
-    document.getElementById("today-mistakes").textContent = todayReport.mistakes;
-    document.getElementById("today-notes").textContent = todayReport.notes;
-  }
-
-  function statusClass(statusText) {
-    if (statusText.includes("بہترین")) return "status-chip status-good";
-    if (statusText.includes("درمیانہ")) return "status-chip status-mid";
-    if (statusText.includes("کمزور")) return "status-chip status-low";
-    return "status-chip status-mid";
-  }
-
-  function fillWeekly() {
-    const tbody = document.getElementById("weekly-body");
-    tbody.innerHTML = "";
-    weeklyReports.forEach(row => {
-      const tr = document.createElement("tr");
-
-      const tdDay = document.createElement("td");
-      tdDay.textContent = row.day;
-      tr.appendChild(tdDay);
-
-      const tdSabaq = document.createElement("td");
-      tdSabaq.textContent = row.sabaq;
-      tr.appendChild(tdSabaq);
-
-      const tdSabqi = document.createElement("td");
-      tdSabqi.textContent = row.sabqi;
-      tr.appendChild(tdSabqi);
-
-      const tdMistakes = document.createElement("td");
-      tdMistakes.textContent = row.mistakes;
-      tr.appendChild(tdMistakes);
-
-      const tdStatus = document.createElement("td");
-      const span = document.createElement("span");
-      span.textContent = row.status;
-      span.className = statusClass(row.status);
-      tdStatus.appendChild(span);
-      tr.appendChild(tdStatus);
-
-      tbody.appendChild(tr);
-    });
-  }
-
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  document.addEventListener("DOMContentLoaded", function () {
-    fillTodayReport();
-    fillWeekly();
-  });
-</script>
+    </section>
+  </main>
 
 </body>
 </html>
