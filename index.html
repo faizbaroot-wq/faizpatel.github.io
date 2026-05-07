@@ -816,4 +816,878 @@ td.att-cell {
           <!-- date sub-headers added by JS -->
         </tr>
       </thead>
-      <t
+      <tbody id="attBody"></tbody>
+    </table>
+  </div>
+
+  <div class="pagination" id="paginationDiv"></div>
+</div>
+
+<!-- PAGE: GUIDELINES -->
+<div class="page" id="page-guidelines">
+  <div class="page-title">📖 اہم ہدایات</div>
+  <div class="guidelines-box">
+    <h2>اساتذہ کے لیے ضروری ہدایات</h2>
+    <ul class="guidelines-list" id="guidelinesList">
+      <li><div class="g-icon">١</div><span>وقت کی پابندی ضروری ہے۔ بروقت حاضری لگانا آپ کی ذمہ داری ہے۔</span></li>
+      <li><div class="g-icon">٢</div><span>ایک مرتبہ حاضری لگانے کے بعد اس میں کوئی تبدیلی ممکن نہیں — صرف ایڈمن تبدیلی کر سکتا ہے۔</span></li>
+      <li><div class="g-icon">٣</div><span>اگر عشاء تک حاضری نہ لگائی گئی تو اس دن خودکار طور پر غیر حاضری درج ہو جائے گی۔</span></li>
+      <li><div class="g-icon">٤</div><span>ہر استاد صرف اپنی قطار میں حاضری لگا سکتا ہے۔ دوسروں کے ریکارڈ میں کوئی تبدیلی ممکن نہیں۔</span></li>
+      <li><div class="g-icon">٥</div><span>کوئی مسئلہ یا شکایت ہو تو فوری طور پر ایڈمن سے رابطہ کریں۔</span></li>
+    </ul>
+    <div id="extraGuidelines"></div>
+  </div>
+</div>
+
+<!-- PAGE: LOGIN -->
+<div class="page" id="page-login">
+  <div class="auth-container">
+    <div class="auth-header">
+      <h2>خوش آمدید</h2>
+      <p>اپنے اکاؤنٹ میں داخل ہوں</p>
+    </div>
+    <div class="auth-body">
+      <div class="form-group">
+        <label>ای میل</label>
+        <input type="email" id="loginEmail" placeholder="email@example.com">
+      </div>
+      <div class="form-group">
+        <label>پاسورڈ</label>
+        <input type="password" id="loginPass" placeholder="••••••••">
+      </div>
+      <button class="btn-primary" onclick="doLogin()">داخل ہوں</button>
+      <button class="btn-secondary" onclick="showPage('register',document.createElement('div'))">نیا اکاؤنٹ بنائیں</button>
+      <div class="form-msg" id="loginMsg"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: REGISTER -->
+<div class="page" id="page-register">
+  <div class="auth-container">
+    <div class="auth-header">
+      <h2>نیا اکاؤنٹ</h2>
+      <p>اپنی معلومات درج کریں</p>
+    </div>
+    <div class="auth-body">
+      <div class="form-group">
+        <label>پورا نام *</label>
+        <input type="text" id="regName" placeholder="مثلاً: محمد علی">
+      </div>
+      <div class="form-group">
+        <label>ای میل *</label>
+        <input type="email" id="regEmail" placeholder="email@example.com">
+      </div>
+      <div class="form-group">
+        <label>پاسورڈ *</label>
+        <input type="password" id="regPass" placeholder="کم از کم ٦ حروف">
+      </div>
+      <div class="form-group">
+        <label>برانچ *</label>
+        <select id="regBranch">
+          <option value="">برانچ منتخب کریں</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>ٹائمنگ شعبہ (ایک یا زیادہ)</label>
+        <select id="regTiming" multiple>
+        </select>
+        <small style="color:var(--gray-500);font-size:0.8rem">Ctrl دباتے ہوئے ایک سے زیادہ منتخب کریں</small>
+      </div>
+      <button class="btn-primary" onclick="doRegister()">اکاؤنٹ بنائیں</button>
+      <button class="btn-secondary" onclick="showPage('login',document.createElement('div'))">پہلے سے اکاؤنٹ ہے؟ داخل ہوں</button>
+      <div class="form-msg" id="regMsg"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: ADMIN LOGIN -->
+<div class="page" id="page-admin-login">
+  <div class="auth-container">
+    <div class="auth-header">
+      <h2>🔐 ایڈمن داخلہ</h2>
+      <p>صرف مجاز افراد کے لیے</p>
+    </div>
+    <div class="auth-body">
+      <div class="form-group">
+        <label>ایڈمن ای میل</label>
+        <input type="email" id="adminLoginEmail" placeholder="admin@sabeel.com">
+      </div>
+      <div class="form-group">
+        <label>ایڈمن پاسورڈ</label>
+        <input type="password" id="adminLoginPass" placeholder="••••••••">
+      </div>
+      <button class="btn-primary" onclick="doAdminLogin()">ایڈمن پینل کھولیں</button>
+      <div class="form-msg" id="adminLoginMsg"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: ADMIN PANEL -->
+<div class="page" id="page-admin">
+  <div class="page-title">🔧 ایڈمن پینل</div>
+  <div class="admin-sections">
+
+    <!-- Add/Edit Teacher -->
+    <div class="admin-card">
+      <div class="admin-card-header">➕ استاد شامل کریں / ترمیم</div>
+      <div class="admin-card-body">
+        <input type="hidden" id="editTeacherId">
+        <div class="form-group">
+          <label>نام</label>
+          <input type="text" id="adminTName" placeholder="استاد کا نام">
+        </div>
+        <div class="form-group">
+          <label>برانچ</label>
+          <select id="adminTBranch">
+            <option value="">برانچ منتخب کریں</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>ٹائمنگ شعبہ</label>
+          <input type="text" id="adminTTiming" placeholder="مثلاً: صبح، شام">
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="btn-primary" style="flex:1" onclick="adminSaveTeacher()">محفوظ کریں</button>
+          <button class="btn-secondary" style="flex:0.4;margin:0" onclick="clearTeacherForm()">صاف</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Teacher List -->
+    <div class="admin-card">
+      <div class="admin-card-header">👨‍🏫 اساتذہ کی فہرست</div>
+      <div class="admin-card-body" style="max-height:350px;overflow-y:auto;">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>نام</th>
+              <th>برانچ</th>
+              <th>اقدامات</th>
+            </tr>
+          </thead>
+          <tbody id="adminTeacherList"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Branch Management -->
+    <div class="admin-card">
+      <div class="admin-card-header">🏫 برانچ / شعبہ مینجمنٹ</div>
+      <div class="admin-card-body">
+        <div style="display:flex;gap:8px;margin-bottom:12px">
+          <input type="text" id="newBranchInput" class="notif-input" placeholder="نئی برانچ کا نام" style="margin:0;flex:1">
+          <button class="btn-primary" style="width:auto;padding:8px 14px" onclick="addBranch()">شامل</button>
+        </div>
+        <div id="branchList"></div>
+        <hr style="margin:14px 0;border:none;border-top:1px solid var(--border)">
+        <label style="font-size:0.9rem;font-weight:600;color:var(--gray-700);margin-bottom:8px;display:block">ٹائمنگ شعبے</label>
+        <div style="display:flex;gap:8px;margin-bottom:8px">
+          <input type="text" id="newTimingInput" class="notif-input" placeholder="نیا شعبہ (مثلاً: صبح)" style="margin:0;flex:1">
+          <button class="btn-primary" style="width:auto;padding:8px 14px" onclick="addTiming()">شامل</button>
+        </div>
+        <div id="timingList"></div>
+      </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="admin-card">
+      <div class="admin-card-header">📢 اطلاع / اہم خبر</div>
+      <div class="admin-card-body">
+        <textarea class="notif-input" id="notifInput" rows="3" placeholder="اطلاع یا اہم خبر لکھیں..."></textarea>
+        <button class="btn-primary" onclick="saveNotif()">اطلاع شائع کریں</button>
+        <button class="btn-secondary" style="margin-top:8px" onclick="clearNotif()">اطلاع ہٹائیں</button>
+      </div>
+    </div>
+
+    <!-- Users Management -->
+    <div class="admin-card" style="grid-column:1/-1">
+      <div class="admin-card-header">👤 صارفین کا انتظام</div>
+      <div class="admin-card-body" style="overflow-x:auto">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>نام</th>
+              <th>ای میل</th>
+              <th>برانچ</th>
+              <th>حیثیت</th>
+              <th>اقدامات</th>
+            </tr>
+          </thead>
+          <tbody id="adminUserList"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Attendance Override -->
+    <div class="admin-card" style="grid-column:1/-1">
+      <div class="admin-card-header">✏️ حاضری تبدیلی (ایڈمن اوورائڈ)</div>
+      <div class="admin-card-body">
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end">
+          <div class="form-group" style="margin:0;flex:1;min-width:160px">
+            <label>استاد</label>
+            <select id="overrideTeacher" class="form-group input" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:8px;font-family:var(--font)">
+              <option value="">استاد منتخب کریں</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin:0;flex:1;min-width:140px">
+            <label>تاریخ</label>
+            <input type="date" id="overrideDate" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:8px">
+          </div>
+          <div class="form-group" style="margin:0;flex:1;min-width:140px">
+            <label>حاضری</label>
+            <select id="overrideStatus" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:8px;font-family:var(--font)">
+              <option value="present">✓ حاضر</option>
+              <option value="absent">✗ غیر حاضر</option>
+              <option value="late">ت تاخیر</option>
+            </select>
+          </div>
+          <button class="btn-primary" style="width:auto;padding:10px 20px;margin:0" onclick="adminOverrideAttendance()">محفوظ کریں</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ======================= DATA & LOGIC ======================= -->
+<script>
+// ============================================================
+//  DATA STORE (localStorage-based, simulates a backend)
+// ============================================================
+const SUPER_ADMIN_EMAIL = 'admin@sabeel.com';
+const SUPER_ADMIN_PASS  = 'sabeel@admin2024';
+
+function getDB() {
+  return JSON.parse(localStorage.getItem('sabelDB') || '{}');
+}
+function saveDB(db) {
+  localStorage.setItem('sabelDB', JSON.stringify(db));
+}
+function initDB() {
+  const db = getDB();
+  if (!db.users)       db.users = [];
+  if (!db.teachers)    db.teachers = [];
+  if (!db.attendance)  db.attendance = {};   // key: "teacherId_YYYY-MM-DD" => {status, locked}
+  if (!db.branches)    db.branches = ['مرکزی', 'شمالی', 'جنوبی'];
+  if (!db.timings)     db.timings  = ['صبح', 'شام', 'سہ پہر'];
+  if (!db.notification) db.notification = '';
+  if (!db.guidelines)  db.guidelines = [];
+  saveDB(db);
+  return db;
+}
+initDB();
+
+// ============================================================
+//  SESSION
+// ============================================================
+let currentUser = JSON.parse(sessionStorage.getItem('sabelUser') || 'null');
+
+function saveSession(user) {
+  currentUser = user;
+  sessionStorage.setItem('sabelUser', JSON.stringify(user));
+}
+function logout() {
+  currentUser = null;
+  sessionStorage.removeItem('sabelUser');
+  updateNavUI();
+  showPage('login', document.querySelector('nav .nav-links li:first-child button'));
+  showToast('آپ نے خروج کر لیا', 'green');
+}
+
+// ============================================================
+//  CLOCK
+// ============================================================
+const URDU_DAYS = ['اتوار','پیر','منگل','بدھ','جمعرات','جمعہ','ہفتہ'];
+const URDU_MONTHS = ['جنوری','فروری','مارچ','اپریل','مئی','جون','جولائی','اگست','ستمبر','اکتوبر','نومبر','دسمبر'];
+
+function pad2(n) { return String(n).padStart(2,'0'); }
+
+function updateClock() {
+  const now = new Date();
+  let h = now.getHours();
+  const m = now.getMinutes();
+  const s = now.getSeconds();
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  if (h > 12) h -= 12;
+  if (h === 0) h = 12;
+  document.getElementById('clockTime').textContent = `${pad2(h)}:${pad2(m)}:${pad2(s)}`;
+  document.getElementById('clockAmPm').textContent = URDU_DAYS[now.getDay()] + ' – ' + ampm;
+
+  // Month display
+  const month = now.getMonth();
+  const year  = now.getFullYear();
+  const daysInMonth = new Date(year, month+1, 0).getDate();
+  const day = now.getDate();
+  let monthLabel = URDU_MONTHS[month];
+  if (day <= 3 && month > 0) monthLabel = URDU_MONTHS[month-1] + ' – ' + URDU_MONTHS[month];
+  if (day >= daysInMonth - 2 && month < 11) monthLabel = URDU_MONTHS[month] + ' – ' + URDU_MONTHS[month+1];
+  document.getElementById('monthName').textContent = monthLabel;
+  document.getElementById('monthYear').textContent = year + ' ء';
+
+  // Auto-absent check (Isha ~ 21:30)
+  if (h === 9 && m === 30 && ampm === 'PM' && s < 2) autoMarkAbsent();
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// ============================================================
+//  PAGE NAVIGATION
+// ============================================================
+function showPage(name, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
+  const pg = document.getElementById('page-' + name);
+  if (pg) pg.classList.add('active');
+  if (btn && btn.classList) btn.classList.add('active');
+
+  if (name === 'attendance') renderAttendance();
+  if (name === 'admin') { renderAdminPanel(); }
+  if (name === 'admin-login' && currentUser?.isAdmin) {
+    showPage('admin', document.getElementById('adminNavBtn'));
+    return;
+  }
+
+  // Populate selects on register
+  if (name === 'register') populateFormSelects();
+}
+
+function updateNavUI() {
+  const userInfo = document.getElementById('userInfo');
+  const loginBtn = document.getElementById('loginNavBtn');
+  const adminNavBtn = document.getElementById('adminNavBtn');
+  if (currentUser) {
+    userInfo.classList.add('active');
+    loginBtn.style.display = 'none';
+    document.getElementById('userNameBadge').textContent = currentUser.name;
+    document.getElementById('adminBadge').style.display = currentUser.isAdmin ? 'inline-block' : 'none';
+    if (currentUser.isAdmin) adminNavBtn.textContent = '🔧 ایڈمن پینل';
+  } else {
+    userInfo.classList.remove('active');
+    loginBtn.style.display = 'block';
+    document.getElementById('adminBadge').style.display = 'none';
+    adminNavBtn.textContent = '🔐 ایڈمن';
+  }
+  // notification
+  const db = getDB();
+  if (db.notification) {
+    document.getElementById('notifText').textContent = db.notification;
+    document.getElementById('notifBar').classList.add('active');
+  }
+}
+updateNavUI();
+
+// ============================================================
+//  REGISTER
+// ============================================================
+function populateFormSelects() {
+  const db = getDB();
+  const bSel = document.getElementById('regBranch');
+  bSel.innerHTML = '<option value="">برانچ منتخب کریں</option>';
+  db.branches.forEach(b => {
+    const o = document.createElement('option');
+    o.value = b; o.textContent = b;
+    bSel.appendChild(o);
+  });
+  const tSel = document.getElementById('regTiming');
+  tSel.innerHTML = '';
+  db.timings.forEach(t => {
+    const o = document.createElement('option');
+    o.value = t; o.textContent = t;
+    tSel.appendChild(o);
+  });
+}
+
+function doRegister() {
+  const name   = document.getElementById('regName').value.trim();
+  const email  = document.getElementById('regEmail').value.trim().toLowerCase();
+  const pass   = document.getElementById('regPass').value;
+  const branch = document.getElementById('regBranch').value;
+  const timingEl = document.getElementById('regTiming');
+  const timing = Array.from(timingEl.selectedOptions).map(o => o.value).join('، ');
+  const msg = document.getElementById('regMsg');
+
+  if (!name || !email || !pass || !branch) {
+    msg.className = 'form-msg error'; msg.textContent = 'تمام لازمی خانے پُر کریں'; return;
+  }
+  if (pass.length < 6) {
+    msg.className = 'form-msg error'; msg.textContent = 'پاسورڈ کم از کم ٦ حروف کا ہونا چاہیے'; return;
+  }
+  const db = getDB();
+  if (db.users.find(u => u.email === email)) {
+    msg.className = 'form-msg error'; msg.textContent = 'یہ ای میل پہلے سے موجود ہے'; return;
+  }
+  const user = {
+    id: 'u' + Date.now(),
+    name, email, pass, branch, timing,
+    isAdmin: email === SUPER_ADMIN_EMAIL,
+    active: true
+  };
+  db.users.push(user);
+  // Also add to teachers list
+  const teacher = { id: 't' + Date.now(), name, branch, timing, userId: user.id };
+  db.teachers.push(teacher);
+  saveDB(db);
+  msg.className = 'form-msg success'; msg.textContent = 'اکاؤنٹ کامیابی سے بن گیا! اب داخل ہوں';
+  setTimeout(() => showPage('login', document.createElement('div')), 1500);
+}
+
+// ============================================================
+//  LOGIN
+// ============================================================
+function doLogin() {
+  const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+  const pass  = document.getElementById('loginPass').value;
+  const msg   = document.getElementById('loginMsg');
+  const db = getDB();
+
+  // Check super admin direct
+  if (email === SUPER_ADMIN_EMAIL && pass === SUPER_ADMIN_PASS) {
+    const adminUser = db.users.find(u => u.email === SUPER_ADMIN_EMAIL) || {
+      id: 'super', name: 'سپر ایڈمن', email: SUPER_ADMIN_EMAIL, isAdmin: true, branch: 'مرکزی'
+    };
+    adminUser.isAdmin = true;
+    saveSession(adminUser);
+    updateNavUI();
+    showPage('attendance', document.querySelector('.nav-links button'));
+    showToast('خوش آمدید، ایڈمن صاحب!', 'green');
+    return;
+  }
+
+  const user = db.users.find(u => u.email === email && u.pass === pass);
+  if (!user) {
+    msg.className = 'form-msg error'; msg.textContent = 'ای میل یا پاسورڈ غلط ہے'; return;
+  }
+  saveSession(user);
+  updateNavUI();
+  showPage('attendance', document.querySelector('.nav-links button'));
+  showToast('خوش آمدید، ' + user.name, 'green');
+}
+
+function doAdminLogin() {
+  const email = document.getElementById('adminLoginEmail').value.trim().toLowerCase();
+  const pass  = document.getElementById('adminLoginPass').value;
+  const msg   = document.getElementById('adminLoginMsg');
+  const db = getDB();
+
+  let user = null;
+  if (email === SUPER_ADMIN_EMAIL && pass === SUPER_ADMIN_PASS) {
+    user = { id: 'super', name: 'سپر ایڈمن', email: SUPER_ADMIN_EMAIL, isAdmin: true };
+  } else {
+    user = db.users.find(u => u.email === email && u.pass === pass && u.isAdmin);
+  }
+  if (!user) {
+    msg.className = 'form-msg error'; msg.textContent = 'ایڈمن اسناد درست نہیں'; return;
+  }
+  saveSession(user);
+  updateNavUI();
+  showPage('admin', document.getElementById('adminNavBtn'));
+  showToast('ایڈمن پینل میں خوش آمدید', 'green');
+}
+
+// ============================================================
+//  WEEK NAVIGATION
+// ============================================================
+const DAY_NAMES_UR = ['پیر','منگل','بدھ','جمعرات','جمعہ','ہفتہ'];
+let currentWeekStart = getWeekStart(new Date());
+let currentPage = 0;
+const PER_PAGE = 12;
+
+function getWeekStart(date) {
+  const d = new Date(date);
+  const day = d.getDay(); // 0=Sun..6=Sat
+  const diff = (day === 0) ? -6 : 1 - day; // Monday
+  d.setDate(d.getDate() + diff);
+  d.setHours(0,0,0,0);
+  return d;
+}
+function changeWeek(dir) {
+  currentWeekStart = new Date(currentWeekStart);
+  currentWeekStart.setDate(currentWeekStart.getDate() + dir * 7);
+  renderAttendance();
+}
+function dateKey(d) {
+  return d.getFullYear() + '-' + pad2(d.getMonth()+1) + '-' + pad2(d.getDate());
+}
+function fmtDate(d) {
+  return pad2(d.getDate()) + '/' + pad2(d.getMonth()+1);
+}
+
+// ============================================================
+//  ATTENDANCE RENDER
+// ============================================================
+function renderAttendance() {
+  const db = getDB();
+  const today = new Date(); today.setHours(0,0,0,0);
+
+  // Week range label
+  const weekEnd = new Date(currentWeekStart);
+  weekEnd.setDate(weekEnd.getDate() + 5);
+  document.getElementById('weekRangeLabel').textContent =
+    fmtDate(currentWeekStart) + ' – ' + fmtDate(weekEnd);
+
+  // Build day columns (Mon-Sat)
+  const days = [];
+  for (let i = 0; i < 6; i++) {
+    const d = new Date(currentWeekStart);
+    d.setDate(d.getDate() + i);
+    days.push(d);
+  }
+
+  // Header
+  const dayRow = document.getElementById('dayHeaderRow');
+  // remove old day cols
+  while (dayRow.children.length > 3) dayRow.removeChild(dayRow.lastChild);
+  days.forEach((d, i) => {
+    const th = document.createElement('th');
+    th.className = 'day-col';
+    if (dateKey(d) === dateKey(today)) th.style.background = '#165c30';
+    th.textContent = DAY_NAMES_UR[i];
+    dayRow.appendChild(th);
+  });
+
+  const dateRow = document.getElementById('dateHeaderRow');
+  while (dateRow.children.length > 3) dateRow.removeChild(dateRow.lastChild);
+  days.forEach(d => {
+    const th = document.createElement('th');
+    if (dateKey(d) === dateKey(today)) th.style.background = '#1a6635';
+    th.textContent = fmtDate(d);
+    dateRow.appendChild(th);
+  });
+
+  // Teachers
+  const teachers = db.teachers;
+  const totalPages = Math.ceil(Math.max(teachers.length, 1) / PER_PAGE);
+  if (currentPage >= totalPages) currentPage = totalPages - 1;
+  const slice = teachers.slice(currentPage * PER_PAGE, (currentPage + 1) * PER_PAGE);
+
+  const tbody = document.getElementById('attBody');
+  tbody.innerHTML = '';
+
+  for (let r = 0; r < PER_PAGE; r++) {
+    const teacher = slice[r] || null;
+    const tr = document.createElement('tr');
+    if (!teacher) tr.className = 'empty-row';
+
+    const numTd = document.createElement('td');
+    numTd.className = 'num-col';
+    numTd.textContent = currentPage * PER_PAGE + r + 1;
+    tr.appendChild(numTd);
+
+    const nameTd = document.createElement('td');
+    nameTd.className = 'name-col';
+    nameTd.textContent = teacher ? teacher.name : '—';
+    tr.appendChild(nameTd);
+
+    const branchTd = document.createElement('td');
+    branchTd.className = 'branch-col';
+    branchTd.textContent = teacher ? teacher.branch : '';
+    tr.appendChild(branchTd);
+
+    days.forEach(d => {
+      const td = document.createElement('td');
+      td.className = 'att-cell';
+      if (dateKey(d) === dateKey(today)) td.classList.add('today-col');
+
+      if (!teacher) { tr.appendChild(td); return; }
+
+      const key = teacher.id + '_' + dateKey(d);
+      const rec = db.attendance[key];
+      const btn = document.createElement('button');
+      btn.className = 'att-btn';
+
+      const isFuture = d > today;
+      const isWeekend = d.getDay() === 0; // Sunday
+      const canMark = currentUser && (currentUser.id === teacher.userId) && !isFuture && !isWeekend;
+
+      if (rec) {
+        if (rec.status === 'present') { btn.classList.add('present','locked'); btn.textContent = '✓'; }
+        else if (rec.status === 'absent') { btn.classList.add('absent','locked'); btn.textContent = '✗'; }
+        else if (rec.status === 'late')  { btn.classList.add('late','locked');   btn.textContent = 'ت'; }
+        btn.disabled = true;
+      } else if (isFuture) {
+        btn.classList.add('future');
+        btn.disabled = true;
+      } else if (canMark) {
+        btn.textContent = '○';
+        btn.title = 'کلک کریں – حاضری لگائیں';
+        btn.onclick = () => markAttendance(teacher.id, dateKey(d), btn);
+      } else {
+        btn.textContent = '–';
+        btn.disabled = true;
+        btn.style.opacity = '0.3';
+      }
+      td.appendChild(btn);
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  }
+
+  // Pagination
+  renderPagination(totalPages);
+}
+
+function markAttendance(teacherId, dateStr, btn) {
+  if (!currentUser) { showToast('پہلے داخل ہوں', 'red'); return; }
+  const db = getDB();
+  const key = teacherId + '_' + dateStr;
+  if (db.attendance[key]) { showToast('حاضری پہلے سے موجود ہے', 'red'); return; }
+  db.attendance[key] = { status: 'present', locked: true, by: currentUser.id, time: new Date().toISOString() };
+  saveDB(db);
+  btn.className = 'att-btn present locked';
+  btn.textContent = '✓';
+  btn.disabled = true;
+  btn.onclick = null;
+  showToast('حاضری کامیابی سے لگ گئی ✓', 'green');
+}
+
+function autoMarkAbsent() {
+  const db = getDB();
+  const today = dateKey(new Date());
+  db.teachers.forEach(t => {
+    const key = t.id + '_' + today;
+    if (!db.attendance[key]) {
+      db.attendance[key] = { status: 'absent', locked: true, auto: true };
+    }
+  });
+  saveDB(db);
+}
+
+function renderPagination(totalPages) {
+  const div = document.getElementById('paginationDiv');
+  div.innerHTML = '';
+  if (totalPages <= 1) return;
+
+  const prev = document.createElement('button');
+  prev.className = 'page-btn';
+  prev.textContent = '◀ پچھلا صفحہ';
+  prev.disabled = currentPage === 0;
+  prev.onclick = () => { currentPage--; renderAttendance(); };
+  div.appendChild(prev);
+
+  const info = document.createElement('span');
+  info.className = 'page-info';
+  info.textContent = `صفحہ ${currentPage+1} از ${totalPages}`;
+  div.appendChild(info);
+
+  const next = document.createElement('button');
+  next.className = 'page-btn';
+  next.textContent = 'اگلا صفحہ ▶';
+  next.disabled = currentPage >= totalPages - 1;
+  next.onclick = () => { currentPage++; renderAttendance(); };
+  div.appendChild(next);
+}
+
+// ============================================================
+//  ADMIN PANEL
+// ============================================================
+function renderAdminPanel() {
+  if (!currentUser?.isAdmin) { showPage('admin-login', document.getElementById('adminNavBtn')); return; }
+  const db = getDB();
+
+  // Teachers list
+  const tbody = document.getElementById('adminTeacherList');
+  tbody.innerHTML = '';
+  if (!db.teachers.length) {
+    tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--gray-500)">کوئی استاد نہیں</td></tr>';
+  }
+  db.teachers.forEach(t => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${t.name}</td><td>${t.branch}</td>
+      <td>
+        <button class="btn-sm gold" onclick="editTeacher('${t.id}')">ترمیم</button>
+        <button class="btn-sm red" onclick="deleteTeacher('${t.id}')">حذف</button>
+      </td>`;
+    tbody.appendChild(tr);
+  });
+
+  // Admin teacher branch select
+  const abrSel = document.getElementById('adminTBranch');
+  abrSel.innerHTML = '<option value="">برانچ منتخب کریں</option>';
+  db.branches.forEach(b => {
+    const o = document.createElement('option'); o.value = b; o.textContent = b; abrSel.appendChild(o);
+  });
+
+  // Branches
+  const bDiv = document.getElementById('branchList');
+  bDiv.innerHTML = '';
+  db.branches.forEach((b,i) => {
+    const span = document.createElement('span');
+    span.style.cssText = 'display:inline-flex;align-items:center;gap:4px;background:var(--gray-100);padding:4px 10px;border-radius:20px;margin:3px;font-size:0.85rem';
+    span.innerHTML = `${b} <button onclick="removeBranch(${i})" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:0.9rem;line-height:1">✕</button>`;
+    bDiv.appendChild(span);
+  });
+
+  // Timings
+  const tDiv = document.getElementById('timingList');
+  tDiv.innerHTML = '';
+  db.timings.forEach((t,i) => {
+    const span = document.createElement('span');
+    span.style.cssText = 'display:inline-flex;align-items:center;gap:4px;background:var(--gray-100);padding:4px 10px;border-radius:20px;margin:3px;font-size:0.85rem';
+    span.innerHTML = `${t} <button onclick="removeTiming(${i})" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:0.9rem;line-height:1">✕</button>`;
+    tDiv.appendChild(span);
+  });
+
+  // Users list
+  const uTbody = document.getElementById('adminUserList');
+  uTbody.innerHTML = '';
+  if (!db.users.length) {
+    uTbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--gray-500)">کوئی صارف نہیں</td></tr>';
+  }
+  db.users.forEach(u => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${u.name}</td><td style="direction:ltr;text-align:left">${u.email}</td>
+      <td>${u.branch||'—'}</td>
+      <td>${u.isAdmin ? '<span class="admin-badge">ایڈمن</span>' : 'استاد'}</td>
+      <td>${u.email === SUPER_ADMIN_EMAIL ? '—' :
+        (u.isAdmin
+          ? `<button class="btn-sm red" onclick="setAdmin('${u.id}',false)">ایڈمن ہٹائیں</button>`
+          : `<button class="btn-sm green" onclick="setAdmin('${u.id}',true)">ایڈمن بنائیں</button>`)
+      }</td>`;
+    uTbody.appendChild(tr);
+  });
+
+  // Override teacher select
+  const oSel = document.getElementById('overrideTeacher');
+  oSel.innerHTML = '<option value="">استاد منتخب کریں</option>';
+  db.teachers.forEach(t => {
+    const o = document.createElement('option'); o.value = t.id; o.textContent = t.name; oSel.appendChild(o);
+  });
+
+  // Notification
+  document.getElementById('notifInput').value = db.notification || '';
+}
+
+function adminSaveTeacher() {
+  const name   = document.getElementById('adminTName').value.trim();
+  const branch = document.getElementById('adminTBranch').value;
+  const timing = document.getElementById('adminTTiming').value.trim();
+  const editId = document.getElementById('editTeacherId').value;
+  if (!name || !branch) { showToast('نام اور برانچ لازمی ہیں', 'red'); return; }
+  const db = getDB();
+  if (editId) {
+    const t = db.teachers.find(x => x.id === editId);
+    if (t) { t.name = name; t.branch = branch; t.timing = timing; }
+  } else {
+    db.teachers.push({ id: 't'+Date.now(), name, branch, timing });
+  }
+  saveDB(db);
+  clearTeacherForm();
+  renderAdminPanel();
+  renderAttendance();
+  showToast('استاد محفوظ ہو گیا', 'green');
+}
+function editTeacher(id) {
+  const db = getDB();
+  const t = db.teachers.find(x => x.id === id);
+  if (!t) return;
+  document.getElementById('editTeacherId').value = t.id;
+  document.getElementById('adminTName').value = t.name;
+  document.getElementById('adminTBranch').value = t.branch;
+  document.getElementById('adminTTiming').value = t.timing || '';
+}
+function deleteTeacher(id) {
+  if (!confirm('کیا آپ واقعی اس استاد کو حذف کرنا چاہتے ہیں؟')) return;
+  const db = getDB();
+  db.teachers = db.teachers.filter(t => t.id !== id);
+  saveDB(db);
+  renderAdminPanel();
+  renderAttendance();
+  showToast('استاد حذف ہو گیا', 'red');
+}
+function clearTeacherForm() {
+  document.getElementById('editTeacherId').value = '';
+  document.getElementById('adminTName').value = '';
+  document.getElementById('adminTBranch').value = '';
+  document.getElementById('adminTTiming').value = '';
+}
+function addBranch() {
+  const val = document.getElementById('newBranchInput').value.trim();
+  if (!val) return;
+  const db = getDB();
+  if (!db.branches.includes(val)) { db.branches.push(val); saveDB(db); }
+  document.getElementById('newBranchInput').value = '';
+  renderAdminPanel();
+  showToast('برانچ شامل ہو گئی', 'green');
+}
+function removeBranch(i) {
+  const db = getDB(); db.branches.splice(i,1); saveDB(db);
+  renderAdminPanel(); showToast('برانچ ہٹا دی گئی');
+}
+function addTiming() {
+  const val = document.getElementById('newTimingInput').value.trim();
+  if (!val) return;
+  const db = getDB();
+  if (!db.timings.includes(val)) { db.timings.push(val); saveDB(db); }
+  document.getElementById('newTimingInput').value = '';
+  renderAdminPanel();
+  showToast('شعبہ شامل ہو گیا', 'green');
+}
+function removeTiming(i) {
+  const db = getDB(); db.timings.splice(i,1); saveDB(db);
+  renderAdminPanel();
+}
+function setAdmin(userId, val) {
+  const db = getDB();
+  const u = db.users.find(x => x.id === userId);
+  if (u) { u.isAdmin = val; saveDB(db); }
+  renderAdminPanel();
+  showToast(val ? 'ایڈمن حقوق دیے گئے' : 'ایڈمن حقوق ہٹائے گئے', 'green');
+}
+function saveNotif() {
+  const val = document.getElementById('notifInput').value.trim();
+  const db = getDB(); db.notification = val; saveDB(db);
+  if (val) {
+    document.getElementById('notifText').textContent = val;
+    document.getElementById('notifBar').classList.add('active');
+  } else {
+    document.getElementById('notifBar').classList.remove('active');
+  }
+  showToast('اطلاع محفوظ ہو گئی', 'green');
+}
+function clearNotif() {
+  document.getElementById('notifInput').value = '';
+  const db = getDB(); db.notification = ''; saveDB(db);
+  document.getElementById('notifBar').classList.remove('active');
+  showToast('اطلاع ہٹا دی گئی');
+}
+function adminOverrideAttendance() {
+  const teacherId = document.getElementById('overrideTeacher').value;
+  const dateStr   = document.getElementById('overrideDate').value;
+  const status    = document.getElementById('overrideStatus').value;
+  if (!teacherId || !dateStr) { showToast('استاد اور تاریخ لازمی ہیں', 'red'); return; }
+  const db = getDB();
+  const key = teacherId + '_' + dateStr;
+  db.attendance[key] = { status, locked: true, adminOverride: true, by: currentUser.id };
+  saveDB(db);
+  renderAttendance();
+  showToast('حاضری تبدیل ہو گئی', 'green');
+}
+
+// ============================================================
+//  TOAST
+// ============================================================
+let toastTimer = null;
+function showToast(msg, type='') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show ' + type;
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ============================================================
+//  INIT
+// ============================================================
+// Show attendance on load; if not logged in, show register prompt if no users
+window.addEventListener('load', () => {
+  const db = getDB();
+  updateNavUI();
+  renderAttendance();
+  if (!currentUser && !db.users.length) {
+    setTimeout(() => showPage('register', document.createElement('div')), 500);
+  }
+});
+</script>
+</body>
+</html>
